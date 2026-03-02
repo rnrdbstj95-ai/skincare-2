@@ -124,7 +124,7 @@ const TranslationManager = {
   updateToggleButton() {
     const btn = document.getElementById('lang-toggle');
     if (btn) {
-      btn.textContent = this.currentLang === 'en' ? 'KR' : 'EN';
+      btn.textContent = this.currentLang === 'en' ? '한글' : 'EN';
     }
   }
 };
