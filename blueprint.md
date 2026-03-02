@@ -15,11 +15,12 @@ A modern, visually appealing, and responsive skincare website focused on providi
   - **Language Toggle:** A button to switch between English and Korean instantly.
   - Mobile Responsiveness: Seamless experience across all devices.
   - Accessibility: Following A11Y standards for inclusivity.
+- **Brand Status:** Brand-less/Neutral. "Lumina" branding has been removed for a clean, focus-on-product experience.
 
-## Current Plan: Language Toggle Implementation
-1. **Update HTML:** Add `data-en` and `data-ko` attributes to all translatable elements. Add a language toggle button to the `nav`.
-2. **Update CSS:** Style the language toggle button.
-3. **Update JS:** 
-   - Implement a `TranslationManager` to handle text switching.
-   - Update the `SkincareProduct` Web Component to support dual-language attributes.
-   - Add event listeners for the toggle button.
+## Current Plan: Branding Removal
+1. **Update index.html:**
+   - Change `<title>` to "Pure & Organic Skincare".
+   - Remove "Lumina" from the navigation logo and footer logo.
+   - Update section headings (e.g., "Why Us?" instead of "Why Lumina?").
+   - Update the footer copyright notice.
+2. **Update CSS (if necessary):** Adjust layout if logo removal impacts spacing.

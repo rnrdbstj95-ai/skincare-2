@@ -98,6 +98,12 @@ const TranslationManager = {
   applyTranslations() {
     document.body.setAttribute('data-lang', this.currentLang);
     
+    // Update document title
+    const titleEl = document.querySelector('title');
+    if (titleEl) {
+      titleEl.textContent = titleEl.getAttribute(`data-${this.currentLang}`);
+    }
+    
     // Update all elements with data-en/data-ko
     const translatableElements = document.querySelectorAll('[data-en][data-ko]');
     translatableElements.forEach(el => {
