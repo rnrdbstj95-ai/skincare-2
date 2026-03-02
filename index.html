@@ -3,12 +3,154 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
+  <title>Lumina - Pure & Organic Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link href='/style.css' rel='stylesheet'>
 </head>
-<body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+<body data-lang="en">
+  <header>
+    <nav class="container">
+      <div class="logo">Lumina</div>
+      <ul class="nav-links">
+        <li><a href="#home" data-en="Home" data-ko="홈">Home</a></li>
+        <li><a href="#products" data-en="Products" data-ko="제품">Products</a></li>
+        <li><a href="#routine" data-en="Routine" data-ko="루틴">Routine</a></li>
+        <li><a href="#about" data-en="About" data-ko="정보">About</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button id="lang-toggle" class="btn-lang" title="Switch Language">KR</button>
+        <button class="btn btn-primary" data-en="Shop Now" data-ko="쇼핑하기">Shop Now</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-content">
+        <h1 data-en="Reveal Your <span class='highlight'>Natural Glow</span>" 
+            data-ko="당신의 <span class='highlight'>자연스러운 광채</span>를 찾으세요">
+          Reveal Your <span class="highlight">Natural Glow</span>
+        </h1>
+        <p data-en="Experience the purity of nature-inspired skincare crafted for your unique skin type."
+           data-ko="당신만의 피부 타입을 위해 정성스럽게 만들어진 자연 유래 스킨케어의 순수함을 경험해 보세요.">
+          Experience the purity of nature-inspired skincare crafted for your unique skin type.
+        </p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" data-en="Explore Products" data-ko="제품 둘러보기">Explore Products</button>
+          <button class="btn btn-outline" data-en="Learn More" data-ko="더 알아보기">Learn More</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features container">
+      <div class="section-title">
+        <h2 data-en="Why Lumina?" data-ko="왜 루미나인가요?">Why Lumina?</h2>
+        <p data-en="Premium ingredients for premium results." data-ko="프리미엄 성분으로 선사하는 최고의 결과.">Premium ingredients for premium results.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h3 data-en="Organic Ingredients" data-ko="유기농 성분">Organic Ingredients</h3>
+          <p data-en="Sourced from sustainable farms to ensure the highest quality for your skin."
+             data-ko="지속 가능한 농장에서 공급받은 최상의 원료로 당신의 피부를 건강하게 가꿔줍니다.">
+            Sourced from sustainable farms to ensure the highest quality for your skin.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧪</div>
+          <h3 data-en="Dermatologically Tested" data-ko="피부과 테스트 완료">Dermatologically Tested</h3>
+          <p data-en="Science-backed formulas that are gentle yet effective on all skin types."
+             data-ko="모든 피부 타입에 순하면서도 효과적인 과학적으로 검증된 포뮬러입니다.">
+            Science-backed formulas that are gentle yet effective on all skin types.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✨</div>
+          <h3 data-en="Instant Results" data-ko="즉각적인 효과">Instant Results</h3>
+          <p data-en="Feel the difference after just one application of our glow-boosting serum."
+             data-ko="글로우 부스팅 세럼 단 한 번의 사용으로도 확연한 차이를 느껴보세요.">
+            Feel the difference after just one application of our glow-boosting serum.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="products container">
+      <div class="section-title">
+        <h2 data-en="Our Bestsellers" data-ko="베스트셀러">Our Bestsellers</h2>
+        <p data-en="Loved by thousands of glow-seekers." data-ko="수많은 고객들이 사랑하는 루미나의 인기 제품들입니다.">Loved by thousands of glow-seekers.</p>
+      </div>
+      <div id="product-list" class="product-grid">
+        <skincare-product 
+          name-en="Glow Serum" 
+          name-ko="글로우 세럼"
+          price="$45" 
+          image="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop"
+          tag-en="Bestseller"
+          tag-ko="베스트셀러"
+        ></skincare-product>
+        <skincare-product 
+          name-en="Hydrating Mist" 
+          name-ko="하이드레이팅 미스트"
+          price="$28" 
+          image="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=400&auto=format&fit=crop"
+          tag-en="New"
+          tag-ko="신제품"
+        ></skincare-product>
+        <skincare-product 
+          name-en="Night Recovery Cream" 
+          name-ko="나이트 리커버리 크림"
+          price="$52" 
+          image="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400&auto=format&fit=crop"
+          tag-en="Top Rated"
+          tag-ko="최고 평점"
+        ></skincare-product>
+      </div>
+    </section>
+
+    <section id="cta" class="cta-section">
+      <div class="container cta-content">
+        <h2 data-en="Join the Lumina Community" data-ko="루미나 커뮤니티에 참여하세요">Join the Lumina Community</h2>
+        <p data-en="Subscribe to get skincare tips and exclusive offers."
+           data-ko="뉴스레터를 구독하고 스킨케어 팁과 특별한 혜택을 받아보세요.">
+          Subscribe to get skincare tips and exclusive offers.
+        </p>
+        <div class="subscribe-form">
+          <input type="email" placeholder="Enter your email">
+          <button class="btn btn-secondary" data-en="Subscribe" data-ko="구독하기">Subscribe</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-info">
+        <div class="logo">Lumina</div>
+        <p data-en="Premium skincare for a healthier you." data-ko="당신의 더 건강한 아름다움을 위한 프리미엄 스킨케어.">Premium skincare for a healthier you.</p>
+      </div>
+      <div class="footer-links">
+        <h4 data-en="Links" data-ko="링크">Links</h4>
+        <ul>
+          <li><a href="#" data-en="Privacy Policy" data-ko="개인정보처리방침">Privacy Policy</a></li>
+          <li><a href="#" data-en="Terms of Service" data-ko="이용약관">Terms of Service</a></li>
+          <li><a href="#" data-en="Shipping Info" data-ko="배송 정보">Shipping Info</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4 data-en="Follow Us" data-ko="팔로우 하세요">Follow Us</h4>
+        <div class="social-icons">
+          <!-- Icons can be added here -->
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Lumina Skincare. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script defer type="module" src="/main.js"></script>
 </body>
 </html>
