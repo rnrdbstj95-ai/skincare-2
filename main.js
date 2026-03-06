@@ -133,16 +133,34 @@ const TranslationManager = {
  */
 const DiagnosisSystem = {
   step: 1,
-  results: {},
+  results: {
+    symptoms: []
+  },
 
   init() {
     const quizBtns = document.querySelectorAll('.quiz-btn');
     quizBtns.forEach(btn => {
       btn.addEventListener('click', () => {
-        this.results.symptom = btn.textContent;
-        this.nextStep();
+        btn.classList.toggle('selected');
+        const symptom = btn.getAttribute('data-en');
+        if (btn.classList.contains('selected')) {
+          this.results.symptoms.push(symptom);
+        } else {
+          this.results.symptoms = this.results.symptoms.filter(s => s !== symptom);
+        }
       });
     });
+
+    const nextBtn = document.getElementById('go-to-step-2');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        if (this.results.symptoms.length === 0) {
+          alert(TranslationManager.currentLang === 'en' ? 'Please select at least one symptom.' : '하나 이상의 증상을 선택해 주세요.');
+          return;
+        }
+        this.nextStep();
+      });
+    }
 
     const analyzeBtn = document.querySelector('#diag-step-2 .btn-primary');
     if (analyzeBtn) {
@@ -165,16 +183,105 @@ const DiagnosisSystem = {
     btn.innerHTML = TranslationManager.currentLang === 'en' ? 'Analyzing with AI...' : 'AI 분석 중...';
     
     setTimeout(() => {
-      alert(TranslationManager.currentLang === 'en' 
-        ? 'Analysis Complete! Based on your Heat & Redness symptoms, we recommend soothing recovery agents.' 
-        : '분석 완료! 열감 및 붉은 기 증상을 바탕으로 진정 회복 솔루션을 추천합니다.');
-      
+      this.generateResults();
       btn.disabled = false;
       btn.innerHTML = originalText;
       
       // Scroll to recommendations
       document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
     }, 2000);
+  },
+
+  generateResults() {
+    const isDehydratedOily = this.results.symptoms.includes('Inner skin feels tight minutes after applying oily cream') || 
+                             this.results.symptoms.includes('Face feels tight, but forehead and nose get oily') ||
+                             this.results.symptoms.includes('Face feels tight within 5 mins after washing');
+    const isSensitive = this.results.symptoms.includes('Skin easily stings or reddens when changing cosmetics') || 
+                        this.results.symptoms.includes('Skin reacts much more sensitively to heater or AC') ||
+                        this.results.symptoms.includes('Face often gets hot with emotional changes');
+
+    let diagnosisEn = '';
+    let diagnosisKo = '';
+
+    if (isDehydratedOily && isSensitive) {
+      diagnosisEn = 'Diagnosis: Dehydrated Oily & Sensitive. Your skin barrier is compromised, causing inner dryness despite surface oil. Focus on Panthenol and Squalane.';
+      diagnosisKo = '진단 결과: 수부지(수분 부족형 지성) 및 민감성. 피부 장벽이 약해져 겉은 번들거리지만 속은 건조한 상태입니다. 판테놀과 스쿠알란 성분에 집중하세요.';
+      this.updateRecommendedProducts('dehydrated-oily-sensitive');
+    } else if (isSensitive) {
+      diagnosisEn = 'Diagnosis: Highly Sensitive. Your skin reacts easily to environment and products. Focus on Centella and Madecassoside.';
+      diagnosisKo = '진단 결과: 초민감성. 외부 자극과 화장품에 쉽게 반응하는 상태입니다. 병풀 추출물과 마데카소사이드 성분이 필요합니다.';
+      this.updateRecommendedProducts('sensitive');
+    } else {
+      diagnosisEn = 'Diagnosis: Combination/Dry. Your skin needs balanced hydration and oil. Focus on Hyaluronic Acid and Ceramides.';
+      diagnosisKo = '진단 결과: 복합성/건성. 유수분 밸런스 조절이 필요합니다. 히알루론산과 세라마이드 성분을 추천합니다.';
+      this.updateRecommendedProducts('general');
+    }
+
+    alert(TranslationManager.currentLang === 'en' ? diagnosisEn : diagnosisKo);
+  },
+
+  updateRecommendedProducts(profile) {
+    const productList = document.getElementById('product-list');
+    let html = '';
+
+    if (profile === 'dehydrated-oily-sensitive') {
+      html = `
+        <skincare-product
+          name-en="Panthenol Barrier Gel"
+          name-ko="판테놀 배리어 젤"
+          price="$32"
+          image="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop"
+          tag-en="99% Match"
+          tag-ko="99% 일치"
+          match="5"
+        ></skincare-product>
+        <skincare-product
+          name-en="Squalane Hydrating Serum"
+          name-ko="스쿠알란 수분 세럼"
+          price="$45"
+          image="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400&auto=format&fit=crop"
+          tag-en="Inner Dryness Hero"
+          tag-ko="속당김 해결사"
+          match="5"
+        ></skincare-product>
+        <skincare-product
+          name-en="Low-pH Soothing Cleanser"
+          name-ko="약산성 진정 클렌저"
+          price="$18"
+          image="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=400&auto=format&fit=crop"
+          tag-en="Gentle Relief"
+          tag-ko="저자극 진정"
+          match="4"
+        ></skincare-product>
+      `;
+    } else {
+      // Keep existing or generic
+      html = `
+        <skincare-product
+          name-en="Cica Recovery Cream"
+          name-ko="시카 리커버리 크림"
+          price="$38"
+          image="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop"
+          tag-en="98% Match"
+          tag-ko="98% 일치"
+          match="5"
+        ></skincare-product>
+        <skincare-product
+          name-en="Ceramide Repair Serum"
+          name-ko="세라마이드 리페어 세럼"
+          price="$42"
+          image="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400&auto=format&fit=crop"
+          tag-en="Clinically Verified"
+          tag-ko="임상 검증 완료"
+          match="5"
+        ></skincare-product>
+      `;
+    }
+    productList.innerHTML = html;
+    // Re-apply lang to new components
+    productList.querySelectorAll('skincare-product').forEach(comp => {
+      comp.setAttribute('lang', TranslationManager.currentLang);
+    });
   }
 };
 
@@ -199,6 +306,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const langBtn = document.getElementById('lang-toggle');
   if (langBtn) langBtn.addEventListener('click', () => TranslationManager.toggle());
+
+  // Get Started buttons scroll to diagnosis
+  document.querySelectorAll('.btn-primary[data-en="Get Started"], .hero-btns .btn-primary').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (btn.tagName === 'A' && btn.getAttribute('href').startsWith('#')) return;
+      e.preventDefault();
+      document.getElementById('diagnosis').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 
   // Modal logic (Affiliate & Policy)
   const modals = ['affiliate-modal', 'policy-modal'];

@@ -13,14 +13,15 @@ A high-value, AI-driven skincare diagnosis platform designed for acquisition (EX
   - **Bilingual Interface:** Optimized for Global and Korean markets.
 - **Legal/Trust:** Privacy Policy specifically covering health/diagnosis data.
 
-## Current Plan: AI Diagnosis Pivot
-1. **System Implementation:**
-   - Built the `DiagnosisSystem` in `main.js` to handle step transitions and analysis simulation.
-   - Designed a responsive `upload-area` for (optional) skin photo analysis.
-2. **Personalized UI:**
-   - Updated `SkincareProduct` component to include a dynamic "Suitability" star rating.
-   - Refined headers and CTAs to emphasize "Getting Started" with diagnosis.
-3. **Trust & Compliance:**
-   - Added medical disclaimers and specific AI-related privacy policies.
-4. **Final Verification:**
-   - Test the quiz flow and ensure recommendations are clearly displayed.
+## Current Plan: Targeted Diagnosis for Dehydrated Oily Skin
+1. **Symptom-Specific Quiz Expansion:**
+   - Add specific symptoms to the quiz: Inner dryness, T-zone oiliness vs. U-zone dryness, sensitivity to environmental factors (AC/Heater), and emotional flushing.
+   - Map these symptoms to the "Dehydrated Oily & Sensitive" (수부지/민감성) profile.
+2. **Personalized Solution Implementation:**
+   - Update `DiagnosisSystem` in `main.js` to recognize the combination of "oily surface but inner tightness" and "sensitivity."
+   - Recommend ingredients like Panthenol, Allantoin, and Squalane for barrier repair without heavy oiliness.
+3. **Visual & Interactive Enhancements:**
+   - Use CSS gradients and subtle textures to create a premium feel.
+   - Ensure the "Analyze Now" button provides a detailed, satisfying feedback loop.
+4. **Verification & Testing:**
+   - Verify that selecting multiple symptoms leads to the correct personalized recommendation.
