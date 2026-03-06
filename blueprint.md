@@ -15,16 +15,15 @@ A high-value, AI-driven skincare diagnosis platform designed for acquisition (EX
   - **Bilingual Interface:** Optimized for Global and Korean markets.
 - **Legal/Trust:** Privacy Policy specifically covering health/diagnosis data.
 
-## Current Plan: Advanced Diagnosis Implementation
-1. **Dynamic Question Engine:**
-   - Define a JSON-like data structure in `main.js` containing all symptoms with their weighted scores and categories.
-   - Implement logic to select and display questions based on the user's chosen entry point (Type, Sensitivity, or Makeup).
+## Current Plan: Advanced Diagnosis Implementation (Checklist UX)
+1. **Checklist Question Engine:**
+   - Update `main.js` to render ALL questions belonging to a selected category on a single page.
+   - Users can scroll and multi-select all symptoms that apply to them.
 2. **UX & Progress Tracking:**
-   - Add a functional Progress Bar to the diagnosis card.
-   - Implement "Next/Back" logic with automated scroll-to-top for smooth transitions.
+   - Replace the step-by-step progress bar with a category-wide completion indicator or simplify the header.
+   - Add a prominent "Analyze My Skin" button at the bottom of the checklist.
 3. **Algorithm & Result Generation:**
-   - Create a scoring engine that calculates the final profile based on accumulated weights.
-   - Map scores to detailed "Skin Reports" and product recommendations.
+   - Maintain the weighted scoring engine to calculate the final profile based on the checklist selections.
 4. **Verification & Testing:**
-   - Ensure the "Makeup" button leads to the correct Category 3 quiz.
-   - Verify that weighted sums correctly identify "Dehydrated Oily" (High Oil + High Dry scores).
+   - Ensure that selecting multiple items in the checklist correctly aggregates scores.
+   - Verify smooth scrolling and clear "Selected" visual states.

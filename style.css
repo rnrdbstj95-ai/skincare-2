@@ -614,25 +614,46 @@ footer {
   padding: 5rem 2rem;
 }
 
-/* Updated Quiz Button for single column multiselect */
 .quiz-btn {
   text-align: left;
   justify-content: flex-start;
   padding: 1.2rem 1.5rem;
   min-height: auto;
-  border-width: 1px;
+  border: 1px solid oklch(90% 0.02 150);
+  background: var(--white);
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .quiz-btn::before {
-  content: '☐';
-  margin-right: 1rem;
-  font-size: 1.2rem;
-  opacity: 0.5;
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid oklch(80% 0.02 150);
+  border-radius: 4px;
+  display: inline-block;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.quiz-btn.selected {
+  background: oklch(95% 0.02 150);
+  border-color: var(--primary);
+  color: var(--primary-dark);
 }
 
 .quiz-btn.selected::before {
-  content: '✓';
-  opacity: 1;
+  background: var(--primary);
+  border-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+  background-size: contain;
 }
 
 .question-header {

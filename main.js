@@ -176,12 +176,10 @@ const DiagnosisData = {
 };
 
 /**
- * Diagnosis System Engine
+ * Diagnosis System Engine (Checklist UX)
  */
 const DiagnosisSystem = {
   currentCategory: null,
-  currentQuestions: [],
-  currentIndex: 0,
   selectedAnswers: new Set(),
   scores: {
     dry: 0, oily: 0, combination: 0, dehydrated: 0, sensitive: 0, barrier: 0
@@ -195,110 +193,77 @@ const DiagnosisSystem = {
       });
     });
 
-    // Control buttons
-    document.getElementById('prev-btn').addEventListener('click', () => this.prevQuestion());
-    document.getElementById('next-btn').addEventListener('click', () => this.nextQuestion());
+    // Replace Control buttons with a single "Analyze" button
+    const controls = document.getElementById('diag-controls');
+    controls.innerHTML = `
+      <button class="btn btn-primary" id="analyze-btn" style="width: 100%; padding: 1.5rem; font-size: 1.2rem;" data-en="Analyze My Skin" data-ko="분석 결과 보기">Analyze My Skin</button>
+    `;
+    
+    document.getElementById('analyze-btn').addEventListener('click', () => this.runAnalysis());
   },
 
   startDiagnosis(category) {
     this.currentCategory = category;
-    this.currentQuestions = [...DiagnosisData.categories[category].questions];
-    // Shuffle logic if requested
-    this.currentQuestions.sort(() => Math.random() - 0.5);
-    
-    this.currentIndex = 0;
     this.selectedAnswers.clear();
     this.resetScores();
 
-    document.getElementById('diag-progress-container').style.display = 'block';
-    document.getElementById('diag-controls').style.display = 'flex';
+    document.getElementById('diag-progress-container').style.display = 'none';
+    document.getElementById('diag-controls').style.display = 'block';
     document.getElementById('diagnosis').scrollIntoView({ behavior: 'smooth' });
     
-    this.renderQuestion();
+    this.renderChecklist();
   },
 
   resetScores() {
     Object.keys(this.scores).forEach(k => this.scores[k] = 0);
   },
 
-  renderQuestion() {
-    const q = this.currentQuestions[this.currentIndex];
+  renderChecklist() {
+    const questions = DiagnosisData.categories[this.currentCategory].questions;
     const content = document.getElementById('diag-step-content');
     const lang = TranslationManager.currentLang;
 
+    let questionsHtml = questions.map(q => `
+      <button class="quiz-btn ${this.selectedAnswers.has(q.id) ? 'selected' : ''}" 
+              onclick="DiagnosisSystem.toggleCheck('${q.id}')"
+              style="margin-bottom: 0.8rem; width: 100%;">
+        ${q[lang]}
+      </button>
+    `).join('');
+
     content.innerHTML = `
-      <div class="question-header">
+      <div class="question-header" style="text-align: center;">
         <span class="category-tag">${DiagnosisData.categories[this.currentCategory][lang]}</span>
-        <h3>${q[lang]}</h3>
+        <h3 style="margin-top: 1rem; margin-bottom: 2rem;" data-en="Check everything that applies to you" data-ko="해당하는 항목을 모두 선택해 주세요">Check everything that applies to you</h3>
       </div>
       <div class="quiz-options multiselect">
-        <button class="quiz-btn ${this.selectedAnswers.has(q.id) ? 'selected' : ''}" onclick="DiagnosisSystem.toggleAnswer('${q.id}')">
-          ${lang === 'en' ? 'This applies to me' : '나에게 해당함'}
-        </button>
-        <button class="quiz-btn ${!this.selectedAnswers.has(q.id) ? 'selected' : ''}" onclick="DiagnosisSystem.toggleAnswer('${q.id}', false)">
-          ${lang === 'en' ? 'Not really' : '해당하지 않음'}
-        </button>
+        ${questionsHtml}
       </div>
     `;
-
-    this.updateProgress();
-    this.updateControls();
   },
 
-  toggleAnswer(id, applies = true) {
-    if (applies) {
-      this.selectedAnswers.add(id);
-    } else {
+  toggleCheck(id) {
+    if (this.selectedAnswers.has(id)) {
       this.selectedAnswers.delete(id);
-    }
-    // Re-render to show selection
-    this.renderQuestion();
-  },
-
-  updateProgress() {
-    const total = this.currentQuestions.length;
-    const current = this.currentIndex + 1;
-    const percentage = Math.round((current / total) * 100);
-
-    document.getElementById('progress-text').textContent = 
-      TranslationManager.currentLang === 'en' ? `Step ${current} of ${total}` : `질문 ${current} / ${total}`;
-    document.getElementById('progress-percent').textContent = `${percentage}%`;
-    document.getElementById('progress-fill').style.width = `${percentage}%`;
-  },
-
-  updateControls() {
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const isLast = this.currentIndex === this.currentQuestions.length - 1;
-
-    prevBtn.disabled = this.currentIndex === 0;
-    nextBtn.textContent = isLast ? 
-      (TranslationManager.currentLang === 'en' ? "Finish" : "결과 보기") : 
-      (TranslationManager.currentLang === 'en' ? "Next" : "다음");
-  },
-
-  prevQuestion() {
-    if (this.currentIndex > 0) {
-      this.currentIndex--;
-      this.renderQuestion();
-    }
-  },
-
-  nextQuestion() {
-    if (this.currentIndex < this.currentQuestions.length - 1) {
-      this.currentIndex++;
-      this.renderQuestion();
     } else {
-      this.runAnalysis();
+      this.selectedAnswers.add(id);
     }
+    // Efficiently update only the button class
+    this.renderChecklist();
   },
 
   runAnalysis() {
+    if (this.selectedAnswers.size === 0) {
+      alert(TranslationManager.currentLang === 'en' ? "Please select at least one symptom." : "하나 이상의 증상을 선택해 주세요.");
+      return;
+    }
+
     document.getElementById('diag-card').style.display = 'none';
     document.getElementById('diag-loading').style.display = 'block';
     
     // Calculate weights
-    this.currentQuestions.forEach(q => {
+    const questions = DiagnosisData.categories[this.currentCategory].questions;
+    questions.forEach(q => {
       if (this.selectedAnswers.has(q.id)) {
         Object.entries(q.weights).forEach(([key, val]) => {
           this.scores[key] += val;
@@ -314,15 +279,14 @@ const DiagnosisSystem = {
   showResults() {
     document.getElementById('diag-loading').style.display = 'none';
     document.getElementById('diag-card').style.display = 'block';
-    document.getElementById('diag-progress-container').style.display = 'none';
     document.getElementById('diag-controls').style.display = 'none';
 
     // Determine Profile
     let profile = 'general';
-    if (this.scores.dehydrated >= 4 && this.scores.oily >= 3) profile = 'dehydrated-oily-sensitive';
-    else if (this.scores.sensitive >= 5) profile = 'sensitive';
-    else if (this.scores.dry >= 5) profile = 'dry';
-    else if (this.scores.oily >= 5) profile = 'oily';
+    if (this.scores.dehydrated >= 3 && this.scores.oily >= 2) profile = 'dehydrated-oily-sensitive';
+    else if (this.scores.sensitive >= 4) profile = 'sensitive';
+    else if (this.scores.dry >= 4) profile = 'dry';
+    else if (this.scores.oily >= 4) profile = 'oily';
 
     const lang = TranslationManager.currentLang;
     const content = document.getElementById('diag-step-content');
@@ -510,7 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.feature-card, .section-title, .about-grid, .diagnosis-card').forEach(el => {
+  document.querySelectorAll('.feature-card, .section-title, .cta-content, .about-grid, .diagnosis-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'all 0.6s ease-out';
