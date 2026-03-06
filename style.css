@@ -500,6 +500,78 @@ footer {
 
 /* --- High-Quality Optimization Styles --- */
 
+/* Diagnosis Section */
+.diagnosis-section {
+  padding: 100px 0;
+  background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+}
+
+.diagnosis-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.diagnosis-card {
+  background: var(--white);
+  padding: 4rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid oklch(95% 0.01 150);
+  display: none;
+  animation: slideIn 0.4s ease-out;
+}
+
+.diagnosis-card.active {
+  display: block;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.quiz-btn {
+  padding: 1.5rem;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.quiz-btn:hover {
+  background: var(--white);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.upload-area {
+  border: 2px dashed oklch(80% 0.05 150);
+  padding: 4rem;
+  text-align: center;
+  border-radius: var(--radius-md);
+  background: oklch(99% 0.005 150);
+  margin-top: 2rem;
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+  border-color: var(--primary);
+  background: var(--white);
+}
+
+.upload-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
 /* About Section */
 .about-section {
   padding: 100px 0;
@@ -578,5 +650,13 @@ footer {
   
   .about-image {
     order: -1;
+  }
+
+  .quiz-options {
+    grid-template-columns: 1fr;
+  }
+
+  .diagnosis-card {
+    padding: 2rem;
   }
 }
