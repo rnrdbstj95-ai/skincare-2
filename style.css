@@ -497,3 +497,86 @@ footer {
     padding: 2rem;
   }
 }
+
+/* --- High-Quality Optimization Styles --- */
+
+/* About Section */
+.about-section {
+  padding: 100px 0;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-text h3 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.benefit-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.benefit-list li {
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Policy Body */
+.policy-body {
+  padding: 2rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  line-height: 1.8;
+}
+
+.policy-body h2 {
+  font-family: var(--font-serif);
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.policy-body h3 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.2rem;
+}
+
+.policy-body p {
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+/* Footer Links Enhancement */
+.policy-link {
+  cursor: pointer;
+}
+
+/* Responsive Updates */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .about-image {
+    order: -1;
+  }
+}
