@@ -97,13 +97,13 @@ const TranslationManager = {
 
   applyTranslations() {
     document.body.setAttribute('data-lang', this.currentLang);
-    
+
     // Update document title
     const titleEl = document.querySelector('title');
     if (titleEl) {
       titleEl.textContent = titleEl.getAttribute(`data-${this.currentLang}`);
     }
-    
+
     // Update all elements with data-en/data-ko
     const translatableElements = document.querySelectorAll('[data-en][data-ko]');
     translatableElements.forEach(el => {
@@ -138,6 +138,26 @@ document.addEventListener('DOMContentLoaded', () => {
   if (langBtn) {
     langBtn.addEventListener('click', () => TranslationManager.toggle());
   }
+
+  // Modal
+  const affiliateModal = document.getElementById('affiliate-modal');
+  const affiliateLink = document.getElementById('affiliate-link');
+  const closeButton = affiliateModal.querySelector('.close-button');
+
+  affiliateLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      affiliateModal.style.display = 'block';
+  });
+
+  closeButton.addEventListener('click', () => {
+      affiliateModal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (event) => {
+      if (event.target == affiliateModal) {
+          affiliateModal.style.display = 'none';
+      }
+  });
 
   // Intersection Observer for fade-in
   const observer = new IntersectionObserver((entries) => {

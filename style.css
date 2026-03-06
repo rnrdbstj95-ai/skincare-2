@@ -8,7 +8,7 @@
   --text: oklch(25% 0.02 150);
   --text-light: oklch(50% 0.02 150);
   --white: oklch(100% 0 0);
-  
+
   /* Spacing & Borders */
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -16,7 +16,7 @@
   --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-  
+
   /* Typography */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
@@ -300,19 +300,13 @@ nav {
   font-family: var(--font-sans);
 }
 
-/* Affiliate Section */
-.affiliate-section {
-  padding: 100px 0;
-}
-
+/* Affiliate Section (within modal) */
 .form-container {
   max-width: 800px;
   margin: 0 auto;
   background: var(--white);
   padding: 4rem;
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid oklch(95% 0.01 150);
 }
 
 .contact-form {
@@ -327,7 +321,8 @@ nav {
   gap: 0.8rem;
 }
 
-.form-group:last-of-type {
+.form-group:nth-of-type(3),
+.form-group:nth-of-type(4) {
   grid-column: span 2;
 }
 
@@ -359,6 +354,61 @@ nav {
   margin-top: 1rem;
   width: 100%;
 }
+
+/* Modal */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); 
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    animation: slideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 
 /* Footer */
 footer {
@@ -406,8 +456,8 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-  nav .nav-links, nav .btn {
-    display: none;
+  .nav-links {
+      display: none; 
   }
   
   .hero h1 {
@@ -421,5 +471,29 @@ footer {
   
   .subscribe-form {
     flex-direction: column;
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+  .form-group:nth-of-type(3),
+  .form-group:nth-of-type(4) {
+    grid-column: span 1;
+  }
+  .contact-form .btn {
+    grid-column: span 1;
+  }
+  .modal-content {
+    width: 90%;
+    margin: 20% auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-actions .btn-primary {
+    display: none;
+  }
+  .form-container {
+    padding: 2rem;
   }
 }

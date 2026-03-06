@@ -18,6 +18,7 @@
         <li><a href="#products" data-en="Products" data-ko="제품">Products</a></li>
         <li><a href="#routine" data-en="Routine" data-ko="루틴">Routine</a></li>
         <li><a href="#about" data-en="About" data-ko="정보">About</a></li>
+        <li><a href="#affiliate-modal" id="affiliate-link" data-en="Affiliate" data-ko="제휴 문의">Affiliate</a></li>
       </ul>
       <div class="nav-actions">
         <button id="lang-toggle" class="btn-lang" title="Switch Language">한글</button>
@@ -29,7 +30,7 @@
   <main>
     <section id="home" class="hero">
       <div class="container hero-content">
-        <h1 data-en="Reveal Your <span class='highlight'>Natural Glow</span>" 
+        <h1 data-en="Reveal Your <span class='highlight'>Natural Glow</span>"
             data-ko="당신의 <span class='highlight'>자연스러운 광채</span>를 찾으세요">
           Reveal Your <span class="highlight">Natural Glow</span>
         </h1>
@@ -83,26 +84,26 @@
         <p data-en="Loved by thousands of glow-seekers." data-ko="수많은 고객들이 사랑하는 루미나의 인기 제품들입니다.">Loved by thousands of glow-seekers.</p>
       </div>
       <div id="product-list" class="product-grid">
-        <skincare-product 
-          name-en="Glow Serum" 
+        <skincare-product
+          name-en="Glow Serum"
           name-ko="글로우 세럼"
-          price="$45" 
+          price="$45"
           image="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop"
           tag-en="Bestseller"
           tag-ko="베스트셀러"
         ></skincare-product>
-        <skincare-product 
-          name-en="Hydrating Mist" 
+        <skincare-product
+          name-en="Hydrating Mist"
           name-ko="하이드레이팅 미스트"
-          price="$28" 
+          price="$28"
           image="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=400&auto=format&fit=crop"
           tag-en="New"
           tag-ko="신제품"
         ></skincare-product>
-        <skincare-product 
-          name-en="Night Recovery Cream" 
+        <skincare-product
+          name-en="Night Recovery Cream"
           name-ko="나이트 리커버리 크림"
-          price="$52" 
+          price="$52"
           image="https://images.unsplash.com/photo-1556228720-195a672e8a03?q=80&w=400&auto=format&fit=crop"
           tag-en="Top Rated"
           tag-ko="최고 평점"
@@ -123,35 +124,6 @@
         </div>
       </div>
     </section>
-
-    <section id="affiliate" class="affiliate-section container">
-      <div class="section-title">
-        <h2 data-en="Affiliate Inquiry" data-ko="제휴 문의">Affiliate Inquiry</h2>
-        <p data-en="Interested in partnering with us? Fill out the form below." data-ko="우리와 함께하고 싶으신가요? 아래 양식을 작성해 주세요.">Interested in partnering with us? Fill out the form below.</p>
-      </div>
-      <div class="form-container">
-        <form action="https://formspree.io/f/xeerjydz" method="POST" class="contact-form">
-          <div class="form-group">
-            <label for="name" data-en="Full Name" data-ko="성함">Full Name</label>
-            <input type="text" id="name" name="name" required placeholder="John Doe" data-en-placeholder="John Doe" data-ko-placeholder="홍길동">
-          </div>
-          <div class="form-group">
-            <label for="email" data-en="Email Address" data-ko="이메일 주소">Email Address</label>
-            <input type="email" id="email" name="_replyto" required placeholder="example@email.com" data-en-placeholder="example@email.com" data-ko-placeholder="example@email.com">
-          </div>
-          <div class="form-group">
-            <label for="company" data-en="Company Name" data-ko="회사명">Company Name</label>
-            <input type="text" id="company" name="company" placeholder="Your Company" data-en-placeholder="Your Company" data-ko-placeholder="회사명">
-          </div>
-          <div class="form-group">
-            <label for="message" data-en="Message" data-ko="문의 내용">Message</label>
-            <textarea id="message" name="message" required rows="5" placeholder="Tell us about your proposal..." data-en-placeholder="Tell us about your proposal..." data-ko-placeholder="제안 내용을 입력해 주세요..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" data-en="Submit Inquiry" data-ko="문의하기">Submit Inquiry</button>
-        </form>
-      </div>
-    </section>
-
   </main>
 
   <footer>
@@ -180,6 +152,38 @@
     </div>
   </footer>
 
+  <div id="affiliate-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <div class="section-title">
+        <h2 data-en="Affiliate Inquiry" data-ko="제휴 문의">Affiliate Inquiry</h2>
+        <p data-en="Interested in partnering with us? Fill out the form below." data-ko="우리와 함께하고 싶으신가요? 아래 양식을 작성해 주세요.">Interested in partnering with us? Fill out the form below.</p>
+      </div>
+      <div class="form-container">
+        <form action="https://formspree.io/f/xeerjydz" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name" data-en="Full Name" data-ko="성함">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe" data-en-placeholder="John Doe" data-ko-placeholder="홍길동">
+          </div>
+          <div class="form-group">
+            <label for="email" data-en="Email Address" data-ko="이메일 주소">Email Address</label>
+            <input type="email" id="email" name="_replyto" required placeholder="example@email.com" data-en-placeholder="example@email.com" data-ko-placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="company" data-en="Company Name" data-ko="회사명">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="Your Company" data-en-placeholder="Your Company" data-ko-placeholder="회사명">
+          </div>
+          <div class="form-group">
+            <label for="message" data-en="Message" data-ko="문의 내용">Message</label>
+            <textarea id="message" name="message" required rows="5" placeholder="Tell us about your proposal..." data-en-placeholder="Tell us about your proposal..." data-ko-placeholder="제안 내용을 입력해 주세요..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" data-en="Submit Inquiry" data-ko="문의하기">Submit Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script defer type="module" src="/main.js"></script>
+  <!-- Triggering Re-deployment -->
 </body>
 </html>
