@@ -13,14 +13,19 @@ A modern, visually appealing, and responsive skincare website focused on providi
   - Product List: A clean, grid-based layout for skincare products.
   - Interactive Elements: Buttons with "glow" effects and smooth transitions.
   - **Language Toggle:** A button to switch between English and Korean instantly.
+  - **Affiliate Inquiry Form:** A professionally designed contact form using Formspree for handling partnership requests, supporting bilingual labels.
   - Mobile Responsiveness: Seamless experience across all devices.
   - Accessibility: Following A11Y standards for inclusivity.
 - **Brand Status:** Brand-less/Neutral. "Lumina" branding has been removed for a clean, focus-on-product experience.
 
-## Current Plan: Branding Removal
+## Current Plan: Affiliate Inquiry Integration
 1. **Update index.html:**
-   - Change `<title>` to "Pure & Organic Skincare".
-   - Remove "Lumina" from the navigation logo and footer logo.
-   - Update section headings (e.g., "Why Us?" instead of "Why Lumina?").
-   - Update the footer copyright notice.
-2. **Update CSS (if necessary):** Adjust layout if logo removal impacts spacing.
+   - Add a new `affiliate-section` with a Formspree-powered form (`https://formspree.io/f/xeerjydz`).
+   - Ensure all form fields and labels have bilingual support (`data-en` and `data-ko`).
+2. **Update style.css:**
+   - Style the form container with soft shadows and a clean layout.
+   - Use a two-column grid for standard inputs and a full-width field for the message.
+   - Ensure input focus states align with the brand's primary color.
+3. **Verify:**
+   - Check the form's layout and responsiveness.
+   - Ensure the Formspree endpoint is correctly configured.

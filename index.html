@@ -118,11 +118,40 @@
           Subscribe to get skincare tips and exclusive offers.
         </p>
         <div class="subscribe-form">
-          <input type="email" placeholder="Enter your email">
+          <input type="email" placeholder="Enter your email" data-en-placeholder="Enter your email" data-ko-placeholder="이메일을 입력하세요">
           <button class="btn btn-secondary" data-en="Subscribe" data-ko="구독하기">Subscribe</button>
         </div>
       </div>
     </section>
+
+    <section id="affiliate" class="affiliate-section container">
+      <div class="section-title">
+        <h2 data-en="Affiliate Inquiry" data-ko="제휴 문의">Affiliate Inquiry</h2>
+        <p data-en="Interested in partnering with us? Fill out the form below." data-ko="우리와 함께하고 싶으신가요? 아래 양식을 작성해 주세요.">Interested in partnering with us? Fill out the form below.</p>
+      </div>
+      <div class="form-container">
+        <form action="https://formspree.io/f/xeerjydz" method="POST" class="contact-form">
+          <div class="form-group">
+            <label for="name" data-en="Full Name" data-ko="성함">Full Name</label>
+            <input type="text" id="name" name="name" required placeholder="John Doe" data-en-placeholder="John Doe" data-ko-placeholder="홍길동">
+          </div>
+          <div class="form-group">
+            <label for="email" data-en="Email Address" data-ko="이메일 주소">Email Address</label>
+            <input type="email" id="email" name="_replyto" required placeholder="example@email.com" data-en-placeholder="example@email.com" data-ko-placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="company" data-en="Company Name" data-ko="회사명">Company Name</label>
+            <input type="text" id="company" name="company" placeholder="Your Company" data-en-placeholder="Your Company" data-ko-placeholder="회사명">
+          </div>
+          <div class="form-group">
+            <label for="message" data-en="Message" data-ko="문의 내용">Message</label>
+            <textarea id="message" name="message" required rows="5" placeholder="Tell us about your proposal..." data-en-placeholder="Tell us about your proposal..." data-ko-placeholder="제안 내용을 입력해 주세요..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" data-en="Submit Inquiry" data-ko="문의하기">Submit Inquiry</button>
+        </form>
+      </div>
+    </section>
+
   </main>
 
   <footer>

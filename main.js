@@ -108,11 +108,13 @@ const TranslationManager = {
     const translatableElements = document.querySelectorAll('[data-en][data-ko]');
     translatableElements.forEach(el => {
       const text = el.getAttribute(`data-${this.currentLang}`);
-      if (el.tagName === 'INPUT' && el.type === 'email') {
-        el.placeholder = this.currentLang === 'en' ? 'Enter your email' : '이메일을 입력하세요';
-      } else {
-        el.innerHTML = text;
-      }
+      el.innerHTML = text;
+    });
+
+    // Update placeholders
+    const placeholderElements = document.querySelectorAll('[data-en-placeholder][data-ko-placeholder]');
+    placeholderElements.forEach(el => {
+      el.placeholder = el.getAttribute(`data-${this.currentLang}-placeholder`);
     });
 
     // Update Web Components
