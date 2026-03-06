@@ -162,11 +162,35 @@ nav {
   min-height: 90vh;
   display: flex;
   align-items: center;
-  background: radial-gradient(circle at 80% 20%, var(--secondary) 0%, transparent 40%);
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, var(--secondary) 0%, transparent 60%);
+  text-align: center;
 }
 
-.hero-content {
-  max-width: 700px;
+.hero-content.centered {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-btns-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+}
+
+.hero-btns-vertical .btn {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 .hero h1 {
@@ -519,39 +543,159 @@ footer {
   box-shadow: 0 8px 20px oklch(70% 0.1 150 / 0.3);
 }
 
+/* Diagnosis Progress */
+.diagnosis-progress-wrapper {
+  margin-bottom: 2rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: oklch(90% 0.02 150);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  border-radius: 10px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 10px oklch(70% 0.1 150 / 0.3);
+}
+
+/* Dynamic Card Content */
+.start-prompt {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.start-prompt h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.quiz-options.multiselect {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+/* Loader */
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid oklch(90% 0.02 150);
+  border-top: 5px solid var(--primary);
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#diag-loading {
+  display: none;
+  padding: 5rem 2rem;
+}
+
+/* Updated Quiz Button for single column multiselect */
+.quiz-btn {
+  text-align: left;
+  justify-content: flex-start;
+  padding: 1.2rem 1.5rem;
+  min-height: auto;
+  border-width: 1px;
+}
+
+.quiz-btn::before {
+  content: '☐';
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.5;
+}
+
+.quiz-btn.selected::before {
+  content: '✓';
+  opacity: 1;
+}
+
+.question-header {
+  margin-bottom: 2.5rem;
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  background: var(--secondary);
+  color: var(--text);
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.question-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.result-card {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.result-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.diag-controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .diagnosis-card {
   background: var(--white);
-  padding: 4rem;
+  padding: 3rem;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   border: 1px solid oklch(95% 0.01 150);
   display: none;
   animation: slideIn 0.4s ease-out;
-  opacity: 1 !important; /* Force visibility when active */
-  transform: none !important; /* Reset animation transform */
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .diagnosis-card.active {
   display: block;
-}
-
-.quiz-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.quiz-btn {
-  padding: 1.5rem;
-  background: var(--bg);
-  border: 2px solid transparent;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-align: left;
 }
 
 .quiz-btn:hover {

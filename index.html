@@ -40,7 +40,6 @@
       </ul>
       <div class="nav-actions">
         <button id="lang-toggle" class="btn-lang" title="Switch Language">한글</button>
-        <button class="btn btn-primary" data-en="Get Started" data-ko="진단 시작하기">Get Started</button>
       </div>
     </nav>
   </header>
@@ -48,7 +47,7 @@
   <main>
     <!-- Hero: Focus on Intelligence -->
     <section id="home" class="hero">
-      <div class="container hero-content">
+      <div class="container hero-content centered">
         <h1 data-en="Professional Skin Analysis <span class='highlight'>Driven by AI</span>"
             data-ko="AI가 분석하는 <span class='highlight'>전문적인 피부 진단</span>">
           Professional Skin Analysis <span class="highlight">Driven by AI</span>
@@ -57,9 +56,10 @@
            data-ko="더 이상 추측하지 마세요. 우리의 지능형 시스템이 당신의 피부를 분석하여 과학적으로 검증된 유기농 루틴과 최적의 솔루션을 제공합니다.">
           Stop guessing. Our AI system provides scientifically-backed organic routines.
         </p>
-        <div class="hero-btns">
-          <a href="#diagnosis" class="btn btn-primary" data-en="Start Free Diagnosis" data-ko="무료 진단 시작하기">Start Free Diagnosis</a>
-          <a href="#about" class="btn btn-outline" data-en="Learn About Ingredients" data-ko="성분 정보 알아보기">Learn About Ingredients</a>
+        <div class="hero-btns-vertical">
+          <button class="btn btn-primary btn-diag" data-type="type" data-en="Skin Type Analysis" data-ko="피부 타입 분별">Skin Type Analysis</button>
+          <button class="btn btn-primary btn-diag" data-type="sensitivity" data-en="Skin Sensitivity Analysis" data-ko="피부 민감성 분별">Skin Sensitivity Analysis</button>
+          <button class="btn btn-outline btn-diag" data-type="makeup" data-en="Makeup" data-ko="메이크업">Makeup</button>
         </div>
       </div>
     </section>
@@ -67,33 +67,41 @@
     <!-- AI Diagnosis Section (New) -->
     <section id="diagnosis" class="diagnosis-section container">
       <div class="section-title">
-        <h2 data-en="Smart Skin Analysis" data-ko="지능형 피부 분석">Smart Skin Analysis</h2>
-        <p data-en="Select all symptoms that apply to your skin." data-ko="해당하는 피부 증상을 모두 선택해 주세요.">Select your symptoms.</p>
+        <h2 data-en="Precision Skin Analysis" data-ko="정밀 피부 분석">Precision Skin Analysis</h2>
+        <p data-en="Follow the steps for a personalized science-backed report." data-ko="과학적 근거에 기반한 맞춤형 리포트를 위해 단계를 따라주세요.">Follow the steps for a report.</p>
       </div>
       <div class="diagnosis-container">
-        <div class="diagnosis-card active" id="diag-step-1">
-          <h3 data-en="1. Core Symptoms" data-ko="1. 주요 증상 확인">1. Core Symptoms</h3>
-          <div class="quiz-options multiselect">
-            <button class="quiz-btn" data-en="Skin feels rough to the touch" data-ko="피부를 만졌을 때 거칠거칠하다.">Skin feels rough to the touch</button>
-            <button class="quiz-btn" data-en="Inner skin feels tight minutes after applying oily cream" data-ko="기름기 있는 크림을 발라도 몇분 후에 피부 속이 당긴다.">Inner skin feels tight minutes after applying oily cream</button>
-            <button class="quiz-btn" data-en="Face feels tight within 5 mins after washing" data-ko="세안 후 아무것도 안 바르면 5분 이내에 얼굴 전체가 당긴다.">Face feels tight within 5 mins after washing</button>
-            <button class="quiz-btn" data-en="Face feels tight, but forehead and nose get oily" data-ko="얼굴은 당기는데 이마와 코는 기름이 올라온다.">Face feels tight, but forehead and nose get oily</button>
-            <button class="quiz-btn" data-en="Skin easily stings or reddens when changing cosmetics" data-ko="화장품을 변경하면 피부가 쉽게 따갑거나 붉어진다.">Skin easily stings or reddens when changing cosmetics</button>
-            <button class="quiz-btn" data-en="Skin reacts much more sensitively to heater or AC" data-ko="히터나 에어컨 바람을 쐬면 피부가 평소보다 훨씬 더 민감하게 반응한다.">Skin reacts much more sensitively to heater or AC</button>
-            <button class="quiz-btn" data-en="Skin condition is worse in winter than summer" data-ko="여름보다 겨울에 피부 상태가 안 좋다.">Skin condition is worse in winter than summer</button>
-            <button class="quiz-btn" data-en="Face often gets hot with emotional changes" data-ko="감정적인 변화를 느끼면 얼굴이 자주 뜨거워진다.">Face often gets hot with emotional changes</button>
+        <!-- Progress Tracking -->
+        <div class="diagnosis-progress-wrapper" id="diag-progress-container" style="display: none;">
+          <div class="progress-info">
+            <span class="progress-text" id="progress-text">Step 1 of 3</span>
+            <span class="progress-percentage" id="progress-percent">0%</span>
           </div>
-          <button class="btn btn-primary" id="go-to-step-2" style="margin-top: 1.5rem; width: 100%;" data-en="Next Step" data-ko="다음 단계">Next Step</button>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
         </div>
-        <div class="diagnosis-card" id="diag-step-2">
-          <h3 data-en="2. AI Photo Analysis (Optional)" data-ko="2. AI 사진 분석 (선택 사항)">2. AI Photo Analysis</h3>
-          <div class="upload-area">
-            <div class="upload-icon">📸</div>
-            <p data-en="Upload a clear photo of your skin" data-ko="피부 상태가 잘 보이는 사진을 업로드하세요">Upload skin photo</p>
-            <input type="file" id="skin-photo" hidden>
-            <button class="btn btn-outline" onclick="document.getElementById('skin-photo').click()" data-en="Select Photo" data-ko="사진 선택하기">Select Photo</button>
+
+        <div class="diagnosis-card active" id="diag-card">
+          <div id="diag-step-content">
+            <!-- Dynamic Content Injected Here -->
+            <div class="start-prompt">
+              <h3 data-en="Select a category to begin" data-ko="진단 카테고리를 선택해 주세요">Select a category to begin</h3>
+              <p data-en="Our AI will guide you through a series of specific questions." data-ko="AI가 일련의 구체적인 질문을 통해 당신의 피부를 분석합니다.">AI-guided analysis.</p>
+            </div>
           </div>
-          <button class="btn btn-primary" style="margin-top: 2rem; width: 100%;" data-en="Analyze Now" data-ko="분석 시작하기">Analyze Now</button>
+          
+          <div class="diag-controls" id="diag-controls" style="display: none; margin-top: 2rem; display: flex; gap: 1rem;">
+            <button class="btn btn-outline" id="prev-btn" style="flex: 1;" data-en="Back" data-ko="이전">Back</button>
+            <button class="btn btn-primary" id="next-btn" style="flex: 2;" data-en="Next" data-ko="다음">Next</button>
+          </div>
+        </div>
+
+        <!-- Result Loading State -->
+        <div class="diagnosis-card" id="diag-loading" style="text-align: center;">
+          <div class="loader-spinner"></div>
+          <h3 data-en="Analyzing your profile..." data-ko="피부 프로필 분석 중...">Analyzing your profile...</h3>
+          <p data-en="Our AI is calculating your optimal routine based on your unique symptoms." data-ko="입력하신 증상을 바탕으로 AI가 최적의 루틴을 계산하고 있습니다.">Calculating routine...</p>
         </div>
       </div>
     </section>
